@@ -1,5 +1,5 @@
-/* 缓存 App 外壳，数据接口不缓存（始终请求最新） */
-var CACHE = 'rshnb-app-v1';
+/* App 外壳缓存 v2：网络优先，离线才用缓存（避免旧代码被缓存焊死） */
+var CACHE = 'rshnb-app-v2';
 var SHELL = [
   '/app/',
   '/app/index.html',
@@ -30,12 +30,12 @@ self.addEventListener('fetch', function (e) {
   if (e.request.method !== 'GET') return;
   if (url.pathname.indexOf('/app/') === 0) {
     e.respondWith(
-      caches.match(e.request).then(function (hit) {
-        return hit || fetch(e.request).then(function (res) {
-          var copy = res.clone();
-          caches.open(CACHE).then(function (c) { c.put(e.request, copy); });
-          return res;
-        });
+      fetch(e.request).then(function (res) {
+        var copy = res.clone();
+        caches.open(CACHE).then(function (c) { c.put(e.request, copy); });
+        return res;
+      }).catch(function () {
+        return caches.match(e.request);
       })
     );
   }
