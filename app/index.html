@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#fb7299" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>视频 · rshnb666</title>
+  <link rel="manifest" href="/app/manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="/app/icons/icon-192.png" />
+  <link rel="icon" href="/app/icons/icon-192.png" />
+  <link rel="stylesheet" href="/app/app.css" />
+</head>
+<body>
+
+  <!-- 登录 / 注册 -->
+  <div id="login-view">
+    <div class="login-box">
+      <div class="mascot">R</div>
+      <div class="login-title">rshnb666</div>
+      <div class="login-sub">登录后进入你的视频收藏</div>
+      <div class="login-tabs">
+        <div class="on">登录</div>
+        <div>注册</div>
+      </div>
+      <input id="auth-user" type="text" placeholder="用户名" autocomplete="username" />
+      <input id="auth-pass" type="password" placeholder="密码（≥6位）" autocomplete="current-password" />
+      <button id="auth-btn" class="login-btn">登 录</button>
+      <div id="login-msg" class="login-msg"></div>
+      <div class="login-note">密码加密存储，登录状态仅本次页面有效<br />如需注册点上方「注册」标签</div>
+    </div>
+  </div>
+
+  <!-- 主界面 -->
+  <div id="app-view" style="display:none;">
+    <header class="topbar">
+      <div class="mascot sm" onclick="tab('home')">R</div>
+      <div class="searchbox">
+        <span class="search-icon">🔍</span>
+        <input id="search-input" type="search" placeholder="搜索视频" />
+      </div>
+      <span id="top-user" class="top-user"></span>
+    </header>
+
+    <main id="page-home" class="page">
+      <div class="rank-head">
+        <span class="rank-title">🎬 最新收藏</span>
+        <span class="rank-more" onclick="tab('cat')">全部分区 ›</span>
+      </div>
+      <div id="feed" class="feed"></div>
+      <div id="empty-tip" class="empty-tip" style="display:none;">还没有视频，等你上传第一条 🎉</div>
+    </main>
+
+    <main id="page-cat" class="page" style="display:none;">
+      <div id="chip-row" class="chips"></div>
+      <div id="feed-cat" class="feed"></div>
+    </main>
+
+    <main id="page-mine" class="page" style="display:none;">
+      <div class="me-card">
+        <div class="me-avatar">R</div>
+        <div class="me-info">
+          <div class="me-name" id="me-name">-</div>
+          <div class="me-desc">收藏 <b id="me-count">0</b> 个视频</div>
+        </div>
+      </div>
+      <div class="section-title">📦 关于</div>
+      <div class="about-card">
+        <p>B 站风格视频收藏 App（PWA）</p>
+        <p>可安装到手机主屏幕，全屏运行</p>
+        <p>上传视频请使用电脑桌面工具「上传视频」</p>
+      </div>
+      <button id="logout-btn" class="logout-btn">退出登录</button>
+    </main>
+
+    <nav class="tabbar">
+      <div class="tab active" data-tab="home" onclick="tab('home')"><span class="ti">🏠</span>首页</div>
+      <div class="tab" data-tab="cat" onclick="tab('cat')"><span class="ti">🗂️</span>分区</div>
+      <div class="tab-plus" onclick="openSubmit()"><span class="plus">＋</span></div>
+      <div class="tab" data-tab="mine" onclick="tab('mine')"><span class="ti">👤</span>我的</div>
+    </nav>
+  </div>
+
+  <div id="player-page" style="display:none;">
+    <div class="player-top">
+      <button class="pback" onclick="closePlayer()">‹ 返回</button>
+    </div>
+    <div id="player-box" class="player-box"></div>
+    <div class="player-info">
+      <div id="player-title" class="player-title"></div>
+      <div id="player-meta" class="player-meta"></div>
+      <div id="player-desc" class="player-desc"></div>
+    </div>
+  </div>
+
+  <div id="submit-mask" style="display:none;" onclick="if(event.target===this)closeSubmit()">
+    <div class="sheet">
+      <div class="sheet-title">📤 上传视频</div>
+      <div class="sheet-body">
+        <p class="sheet-line">App 端上传通道即将开通。</p>
+        <p class="sheet-line">现在上传请用电脑上的桌面工具：</p>
+        <p class="sheet-line strong">「上传视频」→ 把视频文件拖进去 → 填标题 → 自动上线，手机立刻能看到。</p>
+      </div>
+      <div class="sheet-btns">
+        <button class="pink" onclick="closeSubmit()">知道了</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="/app/app.js"></script>
+</body>
+</html>

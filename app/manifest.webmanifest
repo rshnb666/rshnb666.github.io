@@ -1,0 +1,16 @@
+{
+  "name": "视频收藏 · rshnb666",
+  "short_name": "视频",
+  "description": "B站风格视频收藏 App",
+  "start_url": "/app/",
+  "scope": "/app/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#fb7299",
+  "background_color": "#f6f7f8",
+  "icons": [
+    { "src": "/app/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/app/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/app/icons/icon-mask.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
