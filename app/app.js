@@ -1,5 +1,5 @@
 // ============ B站风视频收藏 App ============
-var API = 'https://vapp.rsh200891.workers.dev'; // Worker 地址（部署后如不同请改这里）
+var API = 'https://red-bush-5bf2.rsh200891.workers.dev';
 var ALL = [];
 var TOKEN = '';
 var USER = '';
